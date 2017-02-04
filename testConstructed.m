@@ -3,7 +3,7 @@ clc
 
 %% parameter settings
 M = 64; N = 256;    % matrix dimension M-by-N
-K = 20;             % sparsity
+K = 10;             % sparsity
 
 matrixtype = 1; 
 % 1 for Gaussian
@@ -30,7 +30,7 @@ x_ref(randsample(N,K)) = xs;
 
 
 %% Given lambda, construct b, so that x is a stationary point
-lambda = 1e-1;
+lambda = 1e-2;
 
 x = x_ref;
 [b,y,w,output] = construct_test4L12(A,x,lambda);

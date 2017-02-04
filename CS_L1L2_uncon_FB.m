@@ -65,6 +65,12 @@ end
 %% initialize
 x 		= x0; 
 y 		= x0;
+z       = x0;
+xold    = x;
+
+t       = 1; 
+told    = 1;
+
 
 obj         = @(x) .5*norm(A*x-b)^2 + lambda*(norm(x,1)-alpha*norm(x));
 output.pm   = pm;
@@ -73,8 +79,19 @@ output.pm   = pm;
 for it = 1:maxit
     xold    = x;
    
-    y       = x - delta * A' * (A*x - b);
-    x       = shrinkL12(y, delta*lambda, alpha);
+    y = x + told/t * (z-x) + (told-1)/t *(x-xold);
+    z = shrinkL12(y - delta * A' * (A*y - b),delta*lambda, alpha);
+    v = shrinkL12(x - delta * A' * (A*x - b),delta*lambda, alpha);
+     
+    told = t;
+    t = (sqrt(4*t^2+1) + 1)/2;
+        
+    xold = x;
+    if obj(z) <= obj(v)
+        x = z;
+    else
+        x = v;
+    end
    
   
     % stop conditions & outputs
