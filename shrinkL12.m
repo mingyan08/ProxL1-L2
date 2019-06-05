@@ -14,7 +14,7 @@ if max(abs(y)) > 0
     else
         if max(abs(y))>=(1-alpha)*lambda
             [~, i]  = max(abs(y));
-            x(i(1)) = (y(i(1)) + (alpha - 1) * lambda) * sign(y(i(1)));
+            x(i(1)) = (abs(y(i(1))) + (alpha - 1) * lambda) * sign(y(i(1)));
         end
     end
 end
