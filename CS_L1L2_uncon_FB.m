@@ -77,7 +77,6 @@ output.pm   = pm;
 
 
 for it = 1:maxit
-    xold    = x;
    
     y = x + told/t * (z-x) + (told-1)/t *(x-xold);
     z = shrinkL12(y - delta * A' * (A*y - b),delta*lambda, alpha);
